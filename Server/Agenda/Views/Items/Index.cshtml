@@ -1,9 +1,19 @@
-@inherits AgendaWebPage<Item>
+@inherits DnnWebViewPage<Item>
+@using DotNetNuke.Web.Mvc.Framework
+@using DotNetNuke.Web.Mvc.Helpers
 @using Connect.Agenda.Core.Models.Items
 @using Connect.Agenda.Agenda.Common
-@{
+@functions {
+  public string FormatDate(DateTime? dt)
+  {
+    if (dt == null) return "";
+    return ((DateTime)dt).ToString("d");
+  }
 }
 
-<h1>@Model.Title</h1>
+<h1>@Model.CategoryName: @Model.Title</h1>
+<h6>@(Model.VenueName), @Model.City @FormatDate(Model.DateFrom) - @FormatDate(Model.DateTo)</h6>
+
+<p>@Model.Description</p>
 
 <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back</a>

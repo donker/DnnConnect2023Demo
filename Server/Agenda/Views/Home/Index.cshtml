@@ -1,19 +1,35 @@
-@inherits AgendaWebPage
+@inherits DnnWebViewPage
+@using DotNetNuke.Web.Mvc.Framework
+@using DotNetNuke.Web.Mvc.Helpers
 @using Connect.Agenda.Core.Repositories
 @using Connect.Agenda.Agenda.Common
 @{
-  AgendaModuleContext.AddModuleScript();
+  var items = ItemRepository.Instance.GetItems(Dnn.ActiveModule.ModuleID);
 }
 
-<div class="ConnectAgenda Agenda"
-     data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
-     data-moduleid="@Dnn.ActiveModule.ModuleID"
-     data-tabid="@Dnn.ActiveModule.TabID"
-     data-portalid="@Dnn.PortalSettings.PortalId"
-     data-resources="@SerializedResources()"
-     data-security="@(Newtonsoft.Json.JsonConvert.SerializeObject(AgendaModuleContext.Security))"
-     data-cities="@(Newtonsoft.Json.JsonConvert.SerializeObject(VenueRepository.Instance.ListCities(Dnn.ActiveModule.ModuleID)))"
-     data-categories="@(Newtonsoft.Json.JsonConvert.SerializeObject(CategoryRepository.Instance.GetCategories(Dnn.ActiveModule.ModuleID)))"
-     data-venues="@(Newtonsoft.Json.JsonConvert.SerializeObject(VenueRepository.Instance.GetVenues(Dnn.ActiveModule.ModuleID)))"
-     data-detailurl="@Url.Action("Index", "Items", new { id = "-1" })">
-</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Date From</th>
+      <th>Date To</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var item in items)
+    {
+      <tr>
+        <td>@item.Title</td>
+        <td>@item.CategoryName</td>
+        <td>@item.DateFrom</td>
+        <td>@item.DateTo</td>
+        <td>
+          <a href="@Url.Action("Index", "Items", new { id = item.ItemId })">View</a>
+        </td>
+      </tr>
+    }
+</table>
+
+

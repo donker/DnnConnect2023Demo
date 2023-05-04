@@ -1,14 +1,15 @@
 using System.Web.Mvc;
 using Connect.Agenda.Agenda.Common;
+using DotNetNuke.Web.Mvc.Framework.Controllers;
 
 namespace Connect.Agenda.Agenda.Controllers
 {
-    public class HomeController : AgendaMvcController
+  public class HomeController : DnnController
+  {
+    [HttpGet]
+    public ActionResult Index()
     {
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View(AgendaModuleContext.Settings.View);
-        }
+      return View(ModuleSettings.GetSettings(ActiveModule).View);
     }
+  }
 }

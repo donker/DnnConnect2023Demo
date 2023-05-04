@@ -4,26 +4,26 @@ using System;
 
 namespace Connect.Agenda.Agenda.Common
 {
-    public class ModuleController : IPortable
+  public class ModuleController : IPortable
+  {
+    string IPortable.ExportModule(int ModuleID)
     {
-        string IPortable.ExportModule(int ModuleID)
-        {
-            var m = DotNetNuke.Entities.Modules.ModuleController.Instance.GetModule(ModuleID, Null.NullInteger, true);
-            var settings = ModuleSettings.GetSettings(m);
-            return Newtonsoft.Json.JsonConvert.SerializeObject(settings, Newtonsoft.Json.Formatting.None);
-        }
-
-        void IPortable.ImportModule(int ModuleID, string Content, string Version, int UserID)
-        {
-            try
-            {
-                var settings = Newtonsoft.Json.JsonConvert.DeserializeObject<ModuleSettings>(Content);
-                var m = DotNetNuke.Entities.Modules.ModuleController.Instance.GetModule(ModuleID, Null.NullInteger, true);
-                settings.SaveSettings(m);
-            }
-            catch (Exception ex)
-            {
-            }
-        }
+      var m = DotNetNuke.Entities.Modules.ModuleController.Instance.GetModule(ModuleID, Null.NullInteger, true);
+      var settings = ModuleSettings.GetSettings(m);
+      return Newtonsoft.Json.JsonConvert.SerializeObject(settings, Newtonsoft.Json.Formatting.None);
     }
+
+    void IPortable.ImportModule(int ModuleID, string Content, string Version, int UserID)
+    {
+      try
+      {
+        var settings = Newtonsoft.Json.JsonConvert.DeserializeObject<ModuleSettings>(Content);
+        var m = DotNetNuke.Entities.Modules.ModuleController.Instance.GetModule(ModuleID, Null.NullInteger, true);
+        settings.SaveSettings(m);
+      }
+      catch (Exception ex)
+      {
+      }
+    }
+  }
 }
