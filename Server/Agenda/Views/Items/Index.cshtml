@@ -1,0 +1,9 @@
+@inherits AgendaWebPage<Item>
+@using Connect.Agenda.Core.Models.Items
+@using Connect.Agenda.Agenda.Common
+@{
+}
+
+<h1>@Model.Title</h1>
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back</a>

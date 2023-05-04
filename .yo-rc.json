@@ -1,0 +1,28 @@
+{
+  "generator-dotnetnuke": {
+    "promptValues": {
+      "projType": "library",
+      "dnnVersion": "9.11.0",
+      "npm": true,
+      "projectname": "Agenda",
+      "projectdescription": "Agenda module",
+      "yourname": "Peter Donker",
+      "email": "peter@bring2mind.net",
+      "companyfull": "DNN Connect",
+      "companyshort": "Connect",
+      "companyUrl": "dnn-connect.org",
+      "dnnHost": "http://dnndev.me",
+      "dnnRoot": "D:\\test",
+      "namespace": "Connect.Agenda",
+      "Name": "Core",
+      "Namespace": "Connect.Agenda.Core",
+      "ModuleName": "Agenda",
+      "ReactOptions": [],
+      "Separate": false
+    },
+    "Company": "Connect",
+    "Project": "Agenda",
+    "Namespace": "Connect.Agenda",
+    "Solution": "Connect.Agenda"
+  }
+}

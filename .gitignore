@@ -1,0 +1,7 @@
+.out
+.vs
+**/bin
+**/obj
+**/node_modules
+local.json
+Releases

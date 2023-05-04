@@ -1,0 +1,46 @@
+{
+  "name": "Connect.Agenda",
+  "projectType": "module",
+  "friendlyName": "Agenda Module",
+  "description": "Connect Agenda Module",
+  "packageName": "Connect_Agenda",
+  "folder": "MVC/Connect/Agenda",
+  "iconFile": "DesktopModules\\MVC\\Connect\\Agenda\\icon.png",
+  "module": {
+    "azureCompatible": "true",
+    "moduleName": "Connect_Agenda",
+    "foldername": "Connect/Agenda",
+    "businessControllerClass": "Connect.Agenda.Agenda.Common.ModuleController, CONNECT.AGENDA.AGENDA",
+    "supportedFeatures": ["Portable"],
+    "moduleDefinitions": [
+      {
+        "friendlyName": "Connect Agenda",
+        "defaultCacheTime": 0,
+        "moduleControls": [
+          {
+            "controlSrc": "Connect.Agenda.Agenda.Controllers/Home/Index.mvc",
+            "supportsPartialRendering": "False",
+            "controlTitle": "Agenda",
+            "controlType": "View",
+            "viewOrder": 0
+          },
+          {
+            "controlKey": "Settings",
+            "controlSrc": "Connect.Agenda.Agenda.Controllers/Settings/Settings.mvc",
+            "supportsPartialRendering": "False",
+            "controlTitle": "Agenda Settings",
+            "controlType": "Edit",
+            "viewOrder": 0
+          }
+        ],
+        "permissions": [{ "code": "Connect_Agenda_MODULE", "key": "MANAGE", "name": "Can add and edit events" }]
+      }
+    ]
+  },
+  "pathsAndFiles": {
+    "pathToAssemblies": "./bin",
+    "pathToScripts": "./Server/SqlScripts",
+    "assemblies": ["Connect.Agenda.Agenda.dll", "Connect.Agenda.Core.dll"],
+    "excludeFilter": ["Agenda/bin/", "Agenda/obj/"]
+  }
+}

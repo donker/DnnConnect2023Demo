@@ -1,0 +1,16 @@
+{
+    "Template": "templates\\Main.cshtml",
+    "OutputDirectory": ".out",
+    "OrgName": "Connect",
+    "ModuleName": "Agenda",
+    "RootNameSpace": "Connect.Agenda.Core",
+    "SiteConfig": "",
+    "ConnectionString": "Data Source=(local);Initial Catalog=DNNC2023A;uid=test;pwd=test;TrustServerCertificate=True",
+    "ObjectQualifier": "",
+    "DatabaseOwner": "dbo",
+    "ModuleObjectQualifier": "ConnectAgenda_",
+    "IncludeSqlScripts": true,
+    "EnumValues": null,
+    "FullDbPattern": ""
+  }
+  
