@@ -1,0 +1,25 @@
+/******* VIEWS AND FUNCTIONS *******/
+DROP VIEW IF EXISTS {databaseOwner}{objectQualifier}vw_ConnectAgenda_Items
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW {databaseOwner}{objectQualifier}vw_ConnectAgenda_Items
+AS
+SELECT
+ i.*,
+ v.VenueName,
+ v.City,
+ c.CategoryName,
+ cu.DisplayName CreatedByUser,
+ mu.DisplayName ModifiedByUser
+FROM {databaseOwner}{objectQualifier}ConnectAgenda_Items i
+INNER JOIN {databaseOwner}{objectQualifier}ConnectAgenda_Venues v ON i.Venue=v.VenueId
+INNER JOIN {databaseOwner}{objectQualifier}ConnectAgenda_Categories c ON i.Category=c.CategoryId
+LEFT JOIN {databaseOwner}{objectQualifier}Users cu ON cu.UserID=i.CreatedByUserID
+LEFT JOIN {databaseOwner}{objectQualifier}Users mu ON mu.UserID=i.LastModifiedByUserID
+GO
+
+/******* SPROCS *******/

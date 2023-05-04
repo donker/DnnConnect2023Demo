@@ -1,0 +1,20 @@
+/******* SPROCS *******/
+/******* VIEWS AND FUNCTIONS *******/
+DROP VIEW IF EXISTS {databaseOwner}{objectQualifier}vw_ConnectAgenda_Items
+GO
+
+/******* TRIGGERS *******/
+/******* FOREIGN KEYS *******/
+/******* TABLES *******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}ConnectAgenda_Categories') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}ConnectAgenda_Categories
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}ConnectAgenda_Items') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}ConnectAgenda_Items
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}ConnectAgenda_Venues') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}ConnectAgenda_Venues
+GO
+

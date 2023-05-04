@@ -1,0 +1,64 @@
+/******* TABLES *******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}ConnectAgenda_Categories') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}ConnectAgenda_Categories(
+ [CategoryId] [int] IDENTITY(1,1) NOT NULL,
+ [ModuleId] [int] NOT NULL,
+ [CategoryName] [nvarchar](100) NOT NULL,
+ CONSTRAINT PK_{objectQualifier}ConnectAgenda_Categories PRIMARY KEY CLUSTERED 
+(
+ [CategoryId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}ConnectAgenda_Items') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}ConnectAgenda_Items(
+ [ItemId] [int] IDENTITY(1,1) NOT NULL,
+ [ModuleId] [int] NOT NULL,
+ [DateFrom] [datetime] NULL,
+ [DateTo] [datetime] NULL,
+ [Title] [nvarchar](300) NOT NULL,
+ [Description] [nvarchar](max) NULL,
+ [Venue] [int] NOT NULL,
+ [Category] [int] NOT NULL,
+ [CreatedByUserID] [int] NULL,
+ [CreatedOnDate] [datetime] NULL,
+ [LastModifiedByUserID] [int] NULL,
+ [LastModifiedOnDate] [datetime] NULL,
+ CONSTRAINT PK_{objectQualifier}ConnectAgenda_Items PRIMARY KEY CLUSTERED 
+(
+ [ItemId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}ConnectAgenda_Venues') AND type in (N'U'))
+BEGIN
+CREATE TABLE {databaseOwner}{objectQualifier}ConnectAgenda_Venues(
+ [VenueId] [int] IDENTITY(1,1) NOT NULL,
+ [ModuleId] [int] NOT NULL,
+ [VenueName] [nvarchar](200) NOT NULL,
+ [City] [nvarchar](200) NOT NULL,
+ CONSTRAINT PK_{objectQualifier}ConnectAgenda_Venues PRIMARY KEY CLUSTERED 
+(
+ [VenueId] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+
+/******* FOREIGN KEYS *******/
+/******* TRIGGERS *******/
