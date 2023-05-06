@@ -1,8 +1,10 @@
-﻿using DotNetNuke.Entities.Modules;
+﻿using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Security;
 using DotNetNuke.Security.Permissions;
+using System.Web.Caching;
 
 namespace Connect.Agenda.Agenda.Common
 {
@@ -19,6 +21,19 @@ namespace Connect.Agenda.Agenda.Common
       {
         return user.UserID;
       }
+    }
+
+    public static ContextSecurity GetSecurity(ModuleInfo objModule)
+    {
+      return GetSecurity(objModule, UserController.Instance.GetCurrentUserInfo());
+    }
+    public static ContextSecurity GetSecurity(ModuleInfo objModule, UserInfo user)
+    {
+      return CBO.GetCachedObject<ContextSecurity>(new CacheItemArgs(string.Format("security-{0}-{1}", user.UserID, objModule.ModuleID), 10, CacheItemPriority.BelowNormal, objModule, user), GetSecurityCallBack);
+    }
+    private static object GetSecurityCallBack(CacheItemArgs args)
+    {
+      return new ContextSecurity((ModuleInfo)args.Params[0], (UserInfo)args.Params[1]);
     }
 
     public ContextSecurity(ModuleInfo objModule, UserInfo user)

@@ -42,7 +42,7 @@ namespace Connect.Agenda.Agenda.Common
       }
       User = HttpContextSource.Current.Request.IsAuthenticated ? UserController.Instance.GetCurrentUserInfo() : new UserInfo();
       Logger.Trace("UserId " + User.UserID.ToString());
-      var security = new ContextSecurity(context.ActionContext.Request.FindModuleInfo(), UserController.Instance.GetCurrentUserInfo());
+      var security = ContextSecurity.GetSecurity(context.ActionContext.Request.FindModuleInfo());
       Logger.Trace(security.ToString());
       switch (SecurityLevel)
       {
