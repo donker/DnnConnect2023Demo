@@ -2,6 +2,8 @@ import * as React from "react";
 import { createRoot } from "react-dom/client";
 
 import Agenda from "./Components/Agenda";
+import { AppModule } from "./Models/IAppModule";
+import DataService from "./Service";
 
 declare global {
   interface Element {
@@ -26,9 +28,16 @@ Element.prototype.dataString = function (
 export class ComponentLoader {
   public static load(): void {
     document.querySelectorAll(".Agenda").forEach((el) => {
+      const moduleId = el.dataInt("moduleid");
+      var x = new AppModule(
+        moduleId,
+        el.dataInt("tabid"),
+        el.dataString("locale", "en-US"),
+        new DataService(moduleId)
+      )
       createRoot(el).render(
         <Agenda
-          moduleId={el.dataInt("moduleid")}
+          module={x}
           detailUrl={el.dataString("detailurl", "")}
         />
       );

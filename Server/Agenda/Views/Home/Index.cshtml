@@ -4,7 +4,6 @@
 @using Connect.Agenda.Core.Repositories
 @using Connect.Agenda.Agenda.Common
 @{
-  var items = ItemRepository.Instance.GetItems(Dnn.ActiveModule.ModuleID);
   var page = Dnn.DnnPage;
   var contextHelper = new ContextHelper(page);
   contextHelper.RegisterAjaxScript();
