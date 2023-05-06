@@ -38,6 +38,7 @@ export class ComponentLoader {
         moduleId,
         el.dataInt("tabid"),
         el.dataString("locale", "en-US"),
+        el.dataObject("resources"),
         new DataService(moduleId)
       )
       createRoot(el).render(

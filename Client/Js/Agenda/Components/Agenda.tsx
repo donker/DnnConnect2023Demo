@@ -34,7 +34,7 @@ const Agenda: React.FC<IAgendaProps> = props => {
       <div className="row">
         <div className="col-sm-2">
           <div className="form-group">
-            <label htmlFor="category">Category</label>
+            <label htmlFor="category">{props.module.resources.Category}</label>
             <select
               id="category"
               className="form-control"
@@ -50,7 +50,7 @@ const Agenda: React.FC<IAgendaProps> = props => {
         </div>
         <div className="col-sm-2">
           <div className="form-group">
-            <label htmlFor="city">City</label>
+            <label htmlFor="city">{props.module.resources.City}</label>
             <select
               id="city"
               className="form-control"
@@ -66,7 +66,7 @@ const Agenda: React.FC<IAgendaProps> = props => {
         </div>
         <div className="col-sm-2">
           <div className="form-group">
-            <label htmlFor="city">Search</label>
+            <label htmlFor="city">{props.module.resources.Search}</label>
             <input
               id="search"
               className="form-control"
