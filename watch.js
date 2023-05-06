@@ -19,60 +19,43 @@ function copy(start, srcRelativePath, destDir) {
   var relPath = path.relative(start, srcRelativePath);
   const fullDestPath = path.join(destDir, relPath);
   log("Copying: " + srcRelativePath);
-  return fs
-    .ensureDir(path.dirname(fullDestPath))
-    .then(() => fs.copy(srcRelativePath, fullDestPath));
+  return fs.ensureDir(path.dirname(fullDestPath)).then(() =>
+    fs.copy(srcRelativePath, fullDestPath, {
+      overwrite: true,
+      errorOnExist: false,
+      dereference: true,
+    })
+  );
 }
 
-var ignore = [
-  /obj/,
-  /bin/,
-  "**/*.{vb,cs,suo,user}",
-  "**/dnn.json",
-  "**/*.??proj",
-  "**/web*.config",
-  "**/packages.config",
-  "**/.*"
-];
+var ignore = [/obj/, /bin/, "**/*.{vb,cs,suo,user}", "**/dnn.json", "**/*.??proj", "**/web*.config", "**/packages.config", "**/.*"];
 
 const allDlls = pkgAgenda.pathsAndFiles.assemblies
   // .concat(pkgAgenda.pathsAndFiles.assemblies)
-  .map(dll => "bin/" + dll);
+  .map((dll) => "bin/" + dll);
 
 const watcher = (src, dest) =>
   chokidar
     .watch(src, {
       ignored: ignore,
-      persistent: true
+      persistent: true,
     })
-    .on("add", path => copy(src, path, dest))
-    .on("change", path => copy(src, path, dest));
+    .on("add", (path) => copy(src, path, dest))
+    .on("change", (path) => copy(src, path, dest));
 // Todo: delete events?
 
 // Initialize watchers.
-const AgendaWatcher = watcher(
-  "Server/Agenda",
-  pkg.dnn.pathsAndFiles.devSitePath +
-    "\\DesktopModules\\MVC\\Connect\\Agenda"
-);
+const AgendaWatcher = watcher("Server/Agenda", pkg.dnn.pathsAndFiles.devSitePath + "\\DesktopModules\\MVC\\Connect\\Agenda");
 
 const DllWatcher = chokidar
   .watch(allDlls, {
-    persistent: true
+    persistent: true,
   })
-  .on("add", path => {
+  .on("add", (path) => {
     copy("bin", path, pkg.dnn.pathsAndFiles.devSitePath + "\\bin");
-    copy(
-      "bin",
-      path.replace(".dll", ".pdb"),
-      pkg.dnn.pathsAndFiles.devSitePath + "\\bin"
-    );
+    copy("bin", path.replace(".dll", ".pdb"), pkg.dnn.pathsAndFiles.devSitePath + "\\bin");
   })
-  .on("change", path => {
+  .on("change", (path) => {
     copy("bin", path, pkg.dnn.pathsAndFiles.devSitePath + "\\bin");
-    copy(
-      "bin",
-      path.replace(".dll", ".pdb"),
-      pkg.dnn.pathsAndFiles.devSitePath + "\\bin"
-    );
+    copy("bin", path.replace(".dll", ".pdb"), pkg.dnn.pathsAndFiles.devSitePath + "\\bin");
   });
