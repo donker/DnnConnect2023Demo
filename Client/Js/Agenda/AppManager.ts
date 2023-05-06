@@ -49,6 +49,7 @@ export class AppManager {
           el.dataString("locale", "en-US"),
           el.dataObject("resources"),
           el.dataObject("common"),
+          el.dataObject("security"),
           new DataService(moduleId)
         )
       );

@@ -13,7 +13,6 @@ interface IAgendaProps {
   categories: ICategory[];
   venues: IVenue[];
   detailUrl: string;
-  canEdit: boolean;
 };
 
 const Agenda: React.FC<IAgendaProps> = props => {
@@ -80,7 +79,7 @@ const Agenda: React.FC<IAgendaProps> = props => {
           </div>
         </div>
         <div className="col-sm-2" style={{ paddingTop: "24px" }}>
-          {props.canEdit && (
+          {props.module.security.CanManage && (
             <a href="#" className="btn btn-primary"
               onClick={e => {
                 e.preventDefault();
@@ -99,7 +98,6 @@ const Agenda: React.FC<IAgendaProps> = props => {
               item={i}
               detailUrl={props.detailUrl}
               onEdit={item => setItemUnderEdit(item)}
-              canEdit={props.canEdit}
             />
           ))}
         </div>

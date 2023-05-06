@@ -15,7 +15,6 @@ export class ComponentLoader {
           categories={el.dataObject("categories")}
           venues={el.dataObject("venues")}
           detailUrl={el.dataString("detailurl", "")}
-          canEdit={el.dataBoolean("canedit")}
         />
       );
     });
