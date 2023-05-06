@@ -7,6 +7,7 @@ declare global {
     dataInt: (prop: string) => number;
     dataString: (prop: string, defaultValue: string) => string;
     dataObject: (prop: string) => any;
+    dataBoolean: (prop: string) => boolean;
   }
 }
 
@@ -29,6 +30,11 @@ Element.prototype.dataObject = function (this: Element, prop: string): any {
   return JSON.parse(this.getAttribute("data-" + prop) as string);
 };
 
+Element.prototype.dataBoolean = function (this: Element, prop: string): boolean {
+  if (this.getAttribute("data-" + prop) == null) return false;
+  return this.getAttribute("data-" + prop) == "true";
+};
+
 export class AppManager {
   public static Modules = new KeyedCollection<IAppModule>();
 
@@ -43,7 +49,6 @@ export class AppManager {
           el.dataString("locale", "en-US"),
           el.dataObject("resources"),
           el.dataObject("common"),
-          el.dataObject("security"),
           new DataService(moduleId)
         )
       );

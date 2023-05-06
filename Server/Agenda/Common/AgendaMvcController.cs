@@ -5,14 +5,14 @@ using System.Web.Routing;
 
 namespace Connect.Agenda.Agenda.Common
 {
-    public class AgendaMvcController : DnnController
+  public class AgendaMvcController : DnnController
+  {
+
+    private ContextHelper _AgendaModuleContext;
+    public ContextHelper AgendaModuleContext
     {
-
-        private ContextHelper _AgendaModuleContext;
-        public ContextHelper AgendaModuleContext
-        {
-            get { return _AgendaModuleContext ?? (_AgendaModuleContext = new ContextHelper(this)); }
-        }
-
+      get { return _AgendaModuleContext ?? (_AgendaModuleContext = new ContextHelper(this)); }
     }
+
+  }
 }

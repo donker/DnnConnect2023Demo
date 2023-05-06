@@ -1,6 +1,7 @@
 ﻿using Connect.Agenda.Agenda.Common;
 using Connect.Agenda.Core.Models.Items;
 using Connect.Agenda.Core.Repositories;
+using DotNetNuke.Web.Api;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -11,14 +12,14 @@ namespace Connect.Agenda.Agenda.Api
   public class ItemController : AgendaApiController
   {
     [HttpGet]
-    [AgendaAuthorize(SecurityLevel = SecurityAccessLevel.View)]
+    [DnnModuleAuthorize(AccessLevel = DotNetNuke.Security.SecurityAccessLevel.View)]
     public HttpResponseMessage List(int category, string city, string searchText, string sortField, string sortOrder, int pageSize, int pageIndex)
     {
       return Request.CreateResponse(HttpStatusCode.OK, ItemRepository.Instance.List(ActiveModule.ModuleID, DateTime.Now, category, city, searchText, sortField, sortOrder, pageSize, pageIndex).Serialize());
     }
 
     [HttpPost]
-    [AgendaAuthorize(SecurityLevel = SecurityAccessLevel.Manage)]
+    [DnnModuleAuthorize(AccessLevel = DotNetNuke.Security.SecurityAccessLevel.Edit)]
     public HttpResponseMessage Update(Item data)
     {
       if (data.ItemId < 0)

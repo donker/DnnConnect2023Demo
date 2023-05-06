@@ -53,12 +53,6 @@ namespace Connect.Agenda.Agenda.Common
       ModuleContext = context.ActiveModule;
     }
 
-    private ContextSecurity _security;
-    public ContextSecurity Security
-    {
-      get { return _security ?? (_security = ContextSecurity.GetSecurity(ModuleContext)); }
-    }
-
     public void RequirePermissionLevel(bool level)
     {
       if (!level)

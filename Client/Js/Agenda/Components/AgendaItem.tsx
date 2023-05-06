@@ -7,6 +7,7 @@ interface IAgendaItemProps {
   item: IItem;
   detailUrl: string;
   onEdit: (item: IItem) => void;
+  canEdit: boolean;
 };
 
 const AgendaItem: React.FC<IAgendaItemProps> = props => {
@@ -22,7 +23,7 @@ const AgendaItem: React.FC<IAgendaItemProps> = props => {
       </div>
       <div className="panel-footer">
         <a href={props.detailUrl.replace("-1", props.item.ItemId.toString())} className="btn btn-default" style={{ marginRight: "10px" }}>Details</a>
-        {props.module.security.CanManage &&
+        {props.canEdit &&
           <a href="#" className="btn btn-default" onClick={(e) => {
             e.preventDefault();
             props.onEdit(props.item);
