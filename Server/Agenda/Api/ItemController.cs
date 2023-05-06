@@ -15,7 +15,7 @@ namespace Connect.Agenda.Agenda.Api
     [DnnModuleAuthorize(AccessLevel = DotNetNuke.Security.SecurityAccessLevel.View)]
     public HttpResponseMessage List(int category, string city, string searchText, string sortField, string sortOrder, int pageSize, int pageIndex)
     {
-      return Request.CreateResponse(HttpStatusCode.OK, ItemRepository.Instance.List(ActiveModule.ModuleID, DateTime.Now, category, city, searchText, sortField, sortOrder, pageSize, pageIndex));
+      return Request.CreateResponse(HttpStatusCode.OK, ItemRepository.Instance.List(ActiveModule.ModuleID, DateTime.Now, category, city, searchText, sortField, sortOrder, pageSize, pageIndex).Serialize());
     }
 
     [HttpPost]

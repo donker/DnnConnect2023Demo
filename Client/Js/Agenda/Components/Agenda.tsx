@@ -16,8 +16,8 @@ const Agenda: React.FC<IAgendaProps> = props => {
   }, []);
 
   const getItems = () => {
-    props.module.service.getItems(-1, "", "", "DateFrom", "ASC", 25, 0, (data: IItem[]) => {
-      setItems(data);
+    props.module.service.getItems(-1, "", "", "DateFrom", "ASC", 25, 0, (data: IPagedList<IItem>) => {
+      setItems(data.data);
     });
   }
 
