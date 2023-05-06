@@ -21,10 +21,10 @@ const Agenda: React.FC<IAgendaProps> = props => {
 
   React.useEffect(() => {
     getItems();
-  }, []);
+  }, [category, city, searchText]);
 
   const getItems = () => {
-    props.module.service.getItems(-1, "", "", "DateFrom", "ASC", 25, 0, (data: IPagedList<IItem>) => {
+    props.module.service.getItems(category, city, searchText, "DateFrom", "ASC", 25, 0, (data: IPagedList<IItem>) => {
       setItems(data.data);
     });
   }

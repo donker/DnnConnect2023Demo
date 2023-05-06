@@ -9,6 +9,7 @@ declare global {
   interface Element {
     dataInt: (prop: string) => number;
     dataString: (prop: string, defaultValue: string) => string;
+    dataObject: (prop: string) => any;
   }
 }
 
@@ -23,6 +24,10 @@ Element.prototype.dataString = function (
 ): string {
   if (this.getAttribute("data-" + prop) == null) return defaultValue;
   return this.getAttribute("data-" + prop) as string;
+};
+Element.prototype.dataObject = function (this: Element, prop: string): any {
+  if (this.getAttribute("data-" + prop) == null) return null;
+  return JSON.parse(this.getAttribute("data-" + prop) as string);
 };
 
 export class ComponentLoader {
@@ -39,6 +44,9 @@ export class ComponentLoader {
         <Agenda
           module={x}
           detailUrl={el.dataString("detailurl", "")}
+          cities={el.dataObject("cities")}
+          categories={el.dataObject("categories")}
+          venues={el.dataObject("venues")}
         />
       );
     });
