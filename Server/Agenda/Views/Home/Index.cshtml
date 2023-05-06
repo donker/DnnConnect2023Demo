@@ -16,5 +16,5 @@
      data-categories="@(Newtonsoft.Json.JsonConvert.SerializeObject(CategoryRepository.Instance.GetCategories(Dnn.ActiveModule.ModuleID)))"
      data-venues="@(Newtonsoft.Json.JsonConvert.SerializeObject(VenueRepository.Instance.GetVenues(Dnn.ActiveModule.ModuleID)))"
      data-detailurl="@Url.Action("Index", "Items", new { id = "-1" })"
-     data-canedit="@ModulePermissionController.HasModulePermission(Dnn.ActiveModule.ModulePermissions, "EDIT").ToString().ToLowerInvariant()">
+     data-canedit="@ModulePermissionController.HasModulePermission(Dnn.ActiveModule.ModulePermissions, "MANAGE").ToString().ToLowerInvariant()">
 </div>
