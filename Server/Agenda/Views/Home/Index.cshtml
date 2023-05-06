@@ -11,32 +11,9 @@
   contextHelper.AddScript("agenda.js");
 }
 
-<div class="Agenda">
+<div class="ConnectAgenda Agenda"
+     data-locale="@System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName"
+     data-moduleid="@Dnn.ActiveModule.ModuleID"
+     data-tabid="@Dnn.ActiveModule.TabID"
+     data-portalid="@Dnn.PortalSettings.PortalId">
 </div>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Category</th>
-      <th>Date From</th>
-      <th>Date To</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach (var item in items)
-    {
-      <tr>
-        <td>@item.Title</td>
-        <td>@item.CategoryName</td>
-        <td>@item.DateFrom</td>
-        <td>@item.DateTo</td>
-        <td>
-          <a href="@Url.Action("Index", "Items", new { id = item.ItemId })">View</a>
-        </td>
-      </tr>
-    }
-</table>
-
-
